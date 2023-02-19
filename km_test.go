@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestNewLRUCache(t *testing.T) {
+func TestBasicFunctions(t *testing.T) {
 	w, h := GetScreenSize()
 	fmt.Printf("screen: %dx%d\r\n", w, h)
 	KeyDown("a")
