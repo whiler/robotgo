@@ -13,44 +13,7 @@
 
 package robotgo
 
-import (
-	"syscall"
-	"unsafe"
-
-	"github.com/lxn/win"
-)
-
-// FindWindow find window hwnd by name
-func FindWindow(name string) win.HWND {
-	hwnd := win.FindWindow(nil, syscall.StringToUTF16Ptr(name))
-	return hwnd
-}
-
-// GetHWND get foreground window hwnd
-func GetHWND() win.HWND {
-	hwnd := win.GetForegroundWindow()
-	return hwnd
-}
-
-// SendInput send n input event
-func SendInput(nInputs uint32, pInputs unsafe.Pointer, cbSize int32) uint32 {
-	return win.SendInput(nInputs, pInputs, cbSize)
-}
-
-// SendMsg send a message with hwnd
-func SendMsg(hwnd win.HWND, msg uint32, wParam, lParam uintptr) uintptr {
-	return win.SendMessage(hwnd, msg, wParam, lParam)
-}
-
-// SetActiveWindow set window active with hwnd
-func SetActiveWindow(hwnd win.HWND) win.HWND {
-	return win.SetActiveWindow(hwnd)
-}
-
-// SetFocus set window focus with hwnd
-func SetFocus(hwnd win.HWND) win.HWND {
-	return win.SetFocus(hwnd)
-}
+import "github.com/lxn/win"
 
 // ScaleF get the system scale val
 func ScaleF() float64 {
@@ -66,12 +29,12 @@ func GetMainDPI() int {
 	return int(GetDPI(GetHWND()))
 }
 
+// GetHWND get foreground window hwnd
+func GetHWND() win.HWND {
+	return win.GetForegroundWindow()
+}
+
 // GetDPI get the window dpi
 func GetDPI(hwnd win.HWND) uint32 {
 	return win.GetDpiForWindow(hwnd)
-}
-
-// GetSysDPI get the system metrics dpi
-func GetSysDPI(idx int32, dpi uint32) int32 {
-	return win.GetSystemMetricsForDpi(idx, dpi)
 }
